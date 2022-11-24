@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Img Url</title>
+    <style>
+      body {
+        margin-top: 6em;
+        text-align: center;
+        background-color: whitesmoke;
+      }
+      h1 {
+        font-family: Lucida Sans Unicode;
+      }
+      #formContainer {
+        margin-top: 4em;
+        text-align: center;
+
+      }
+      form input {
+        background-color: white;
+        border:none;
+       /* border-color: rgb(255, 171, 238);*/
+        border-radius: 3em;
+        padding: 0.5em 2em 0.5em 2em;
+        margin-right: 0.25em;
+      }
+      form button {
+        cursor: pointer;
+        background-color: rgb(201, 201, 251);
+        border: none;
+        box-shadow: 0 4px 4px #333333;
+        border-radius: 3em;
+        margin-left: 0.25em;
+        padding: 0.5em 1em 0.5em 1em;
+      }
+      form button:hover {
+        background-color: rgb(176, 176, 229);
+        box-shadow: 0 2px 1.5px #333333;
+        
+      }
+
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Get the url of an image file in two clicks.</h1>
+    <div id = "formContainer">
+    <form id ="form1"> 
+        <input type="text" name="userInput" placeholder ="paste url here"/>
+        <button type="button" name="button1">Get url</button>
+    </form>
+  </div>
+
+  
+    <script>
+      const frmElem = document.forms["form1"]; //Referenz auf form object
+      const button1Elem = frmElem["button1"];
+      //event listener
+      button1Elem.addEventListener("click", function () {
+        let textInElem = frmElem["userInput"];
+        const searchTermStart = "&file=";
+        const searchTermEnd = "&do=";
+        const indexOf_http = textInElem.value.indexOf(searchTermStart);
+        const indexOf_jpeg = textInElem.value.indexOf(searchTermEnd);
+        textInElem.value = textInElem.value.substring((indexOf_http + 6), indexOf_jpeg );
+        textInElem.value = textInElem.value.replace('%3A', ':');
+        for (i = 0; i < textInElem.value.length; i++){ 
+          textInElem.value = textInElem.value.replace('%2F', '/');
+        }
+        
+      });
+      </script>
+  </body>
+</html>
